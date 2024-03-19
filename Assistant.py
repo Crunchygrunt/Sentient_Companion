@@ -17,6 +17,7 @@ import pyjokes
 # import threading
 import keyboard
 from detect import get_gender
+import cred
 # import websockets
 # import subprocess
 # import http.server
@@ -45,7 +46,7 @@ async def play_music(song_name=None, frame=None, face_classifier=None):
         sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
             scope=scope,
             client_id="b4290497df484acea745cf0426250fcf",
-            client_secret="0dc88a47fe9645bd970b0599a2831f68", 
+            client_secret=cred.SPOTIFY_CLIENT_SECRET, 
             #os.getenv("SPOTIPY_CLIENT_SECRET"),
             redirect_uri="http://localhost:8888/callback"
             ))
