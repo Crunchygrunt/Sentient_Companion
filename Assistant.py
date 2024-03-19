@@ -16,7 +16,6 @@ from keras.preprocessing.image import img_to_array
 import pyjokes
 # import threading
 import keyboard
-from detect import get_gender
 import cred
 # import websockets
 # import subprocess
@@ -231,10 +230,7 @@ async def main():
         detected_gender = None
 
     # Greet the user based on the detected gender
-    if detected_gender:
-        wishMe(detected_gender)
-    else:
-        wishMe()
+    wishMe(detected_gender)
     
     while True: #if 1 for listening one time
         query = takeCommand().lower()
