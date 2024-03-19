@@ -1,0 +1,26 @@
+{
+  "name": "simple-ai-assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crunchygrunt/Simple-AI-Assistant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Crunchygrunt/Simple-AI-Assistant/issues"
+  },
+  "homepage": "https://github.com/Crunchygrunt/Simple-AI-Assistant#readme",
+  "devDependencies": {
+    "electron": "^29.0.0"
+  },
+  "dependencies": {
+    "bulma": "^0.9.4"
+  }
+}
