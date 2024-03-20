@@ -50,22 +50,6 @@ async def play_music(song_name=None, frame=None, face_classifier=None):
             redirect_uri="http://localhost:8888/callback"
             ))
     
-        # results = sp.search(q=song_name, type="track", limit=1)
-    
-        # if results['tracks']['items']:
-        #     track_uri = results['tracks']['items'][0]['uri']
-        #     sp.start_playback(uris=[track_uri])
-        #     print(f"Playing {song_name}")
-            
-        #     while True:
-        #         query = takeCommand().lower()
-        #         if 'stop music' in query or 'pause music' in query:
-        #             sp.pause_playback()
-        #             speak('Music stopped.')
-        #             break
-            
-        # else:
-        #     print("Song not found.")
         if song_name:
             results = sp.search(q=song_name, type="track", limit=1)
             if results['tracks']['items']:
@@ -117,18 +101,24 @@ def wishMe(detected_gender):
     if hour >= 0 and hour < 12:
         if detected_gender == 'Male':
             speak('Good morning, sir!')
-        else:
+        elif detected_gender == 'female':
             speak('Good morning, mam!')
+        else:
+            speak('Good morning')
     elif hour >= 12 and hour < 18:
         if detected_gender == 'Male':
             speak('Good afternoon, sir!')
+        elif detected_gender == 'female':
+            speak('Good morning, mam!')
         else:
-            speak('Good afternoon, mam!')
+            speak('Good afternoon')
     else:
         if detected_gender == 'Male':
             speak('Good evening, sir!')
+        elif detected_gender == 'female':
+            speak('Good morning, mam!')
         else:
-            speak('Good evening, mam!')
+            speak('Good evening')
     speak('I am an Assistant. How may I help you?')
     speak('Please say the word help manual for the command manual')
 
@@ -276,9 +266,21 @@ async def main():
             speak(f'The time is {strTime}')
         
         elif 'play music' in query:
-            speak("What song would you like to play?")
-            song_name = takeCommand().lower()
-            await play_music(song_name)
+            speak("What song would you like to play? You can say it as 'song name by singer name' for better accuracy.")
+            user_query = takeCommand().lower()
+
+    # Extract song name and singer
+            try:
+        # Split the user query into song name and singer (if provided)
+                parts = user_query.split("by", maxsplit=1)
+                song_name = parts[0].strip()
+                singer = parts[1].strip() if len(parts) > 1 else None
+            except (IndexError, ValueError):
+        # Handle cases where user doesn't provide "by" separator
+                song_name = user_query.strip()
+                singer = None
+
+            await play_music(song_name, singer)
             spotify_visual = True
             open_spotify_visualization()
             
